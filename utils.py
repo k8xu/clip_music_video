@@ -10,6 +10,7 @@ import torch
 import time
 import os
 import re
+from PIL import Image
 
 
 def create_outputfolder():
@@ -46,10 +47,10 @@ def init_textfile(textfile):
 
         lastline = (descs1[-1][0]+9, "end song")
         descs1.append(lastline)
-        
+
     return descs1
 
-def create_image(img, i, text, gen, pre_scaled=True):
+def create_image(img, i, text, gen, savepath, pre_scaled=True):
     if gen == 'stylegan':
         img = (img.clamp(-1, 1) + 1) / 2.0
         img = img[0].permute(1, 2, 0).detach().cpu().numpy() * 256
@@ -59,10 +60,19 @@ def create_image(img, i, text, gen, pre_scaled=True):
     if not pre_scaled:
         img = scale(img, 48*4, 32*4)
     img = np.array(img)
-    with tempfile.NamedTemporaryFile() as image_temp:
-        imageio.imwrite(image_temp.name+".png", img)
-        image_temp.seek(0)
-        return image_temp
+
+    # NEW CODE
+    if i % 10 == 0:
+        img = (img + 1.0) / 2.0 * 255.0
+        img = img.astype(np.uint8)
+        img_pil = Image.fromarray(img)
+        img_pil.save(f"{savepath}/{text}_{i}.png") # Specify save path
+
+    # OLD CODE TO SAVE IMAGE
+    # with tempfile.NamedTemporaryFile() as image_temp:
+    #     imageio.imwrite(image_temp.name+".png", img)
+    #     image_temp.seek(0)
+    #     return image_temp
 
 nom = torchvision.transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
 
@@ -119,7 +129,7 @@ def ascend_txt(model, lats, sideX, sideY, perceptor, percep, gen, tokenizedtxt):
         cutn = 128
         zs = [*lats()]
         out = model(zs[0], zs[1], 1)
-        
+
     elif gen == 'dall-e':
         cutn = 32
         zs = lats()
@@ -133,7 +143,7 @@ def ascend_txt(model, lats, sideX, sideY, perceptor, percep, gen, tokenizedtxt):
         img_logits, _text_logits = perceptor(img, tokenizedtxt.cuda())
 
         return 1/img_logits * 100, img, zs
-    
+
     p_s = []
     for ch in range(cutn):
         # size = int(sideX*torch.zeros(1,).normal_(mean=.8, std=.3).clip(.5, .95))
@@ -192,7 +202,7 @@ def train(i, model, lats, sideX, sideY, perceptor, percep, optimizer, text, toke
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    
+
     if i+1 == epochs:
         # if it's the last step, return the final z
         return zs
