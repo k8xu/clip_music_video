@@ -50,7 +50,7 @@ def init_textfile(textfile):
 
     return descs1
 
-def create_image(img, i, text, gen, savepath, pre_scaled=True):
+def create_image(img, i, text, gen, savepath, unique_num, pre_scaled=True):
     if gen == 'stylegan':
         img = (img.clamp(-1, 1) + 1) / 2.0
         img = img[0].permute(1, 2, 0).detach().cpu().numpy() * 256
@@ -62,11 +62,11 @@ def create_image(img, i, text, gen, savepath, pre_scaled=True):
     img = np.array(img)
 
     # NEW CODE
-    if i % 10 == 0:
-        img = (img + 1.0) / 2.0 * 255.0
-        img = img.astype(np.uint8)
-        img_pil = Image.fromarray(img)
-        img_pil.save(f"{savepath}/{text}_{i}.png") # Specify save path
+    # if i % 10 == 0:
+    img = (img + 1.0) / 2.0 * 255.0
+    img = img.astype(np.uint8)
+    img_pil = Image.fromarray(img)
+    img_pil.save(f"{savepath}/{unique_num}_{text}_{i}.png") # Specify save path
 
     # OLD CODE TO SAVE IMAGE
     # with tempfile.NamedTemporaryFile() as image_temp:

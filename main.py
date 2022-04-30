@@ -65,6 +65,7 @@ lyrics      = args.lyrics
 savepath    = args.savepath
 sideX       = 512
 sideY       = 512
+unique_num  = 0
 
 def main():
 
@@ -194,7 +195,8 @@ def interpolate(templist, descs, model, audiofile, savepath):
                     img = img[0]
                 elif generator == 'stylegan':
                     img = model(azs[0])
-                image_temp = create_image(img, t, current_lyric, generator, savepath)
+                image_temp = create_image(img, t, current_lyric, generator, savepath, unique_num)
+                unique_num += 1
             image_temp_list.append(image_temp)
 
     # OLD CODE TO GENERATE VIDEO
