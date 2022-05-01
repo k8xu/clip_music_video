@@ -62,7 +62,6 @@ def create_image(img, i, text, gen, savepath, unique_num, pre_scaled=True):
     img = np.array(img)
 
     # NEW CODE
-    # if i % 10 == 0:
     img = (img + 1.0) / 2.0 * 255.0
     img = img.astype(np.uint8)
     img_pil = Image.fromarray(img)
