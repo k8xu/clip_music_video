@@ -135,7 +135,7 @@ def sigmoid(x):
     x = x * 2. - 1.
     return math.tanh(1.5*x/(math.sqrt(1.- math.pow(x, 2.)) + 1e-6)) / 2 + .5
 
-def interpolate(templist, descs, model, audiofile, savepath):
+def interpolate(templist, descs, model, audiofile, savepath, unique_num):
 
     video_temp_list = []
 
@@ -207,4 +207,4 @@ def interpolate(templist, descs, model, audiofile, savepath):
 
 if __name__ == '__main__':
     templist, descs, model = main()
-    interpolate(templist, descs, model, audiofile, savepath)
+    interpolate(templist, descs, model, audiofile, savepath, unique_num)
