@@ -1,4 +1,4 @@
-from utils          import train, Pars, create_image, create_outputfolder, init_textfile
+from utils          import train, Pars, create_image, init_textfile
 from dall_e         import map_pixels, unmap_pixels, load_model
 from stylegan       import g_synthesis
 from biggan         import BigGAN
@@ -67,9 +67,6 @@ sideY       = 512
 unique_num  = 0
 
 def main():
-
-    # Automatically creates 'output' folder
-    create_outputfolder()
 
     # Initialize Clip
     perceptor, preprocess   = clip.load('ViT-B/32')

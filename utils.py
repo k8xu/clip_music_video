@@ -13,12 +13,6 @@ import re
 from PIL import Image
 
 
-def create_outputfolder():
-    outputfolder = os.path.join(os.getcwd(), 'output')
-    if os.path.exists(outputfolder):
-        shutil.rmtree(outputfolder)
-    os.mkdir(outputfolder)
-
 def create_strp(d, timeformat):
     return time.mktime(time.strptime(d, timeformat))
 
