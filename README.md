@@ -8,7 +8,7 @@
 
 ## Requirements
 
-You will need Python 3.7 to run the code. The required packages are listed in the `requirements.txt` file.
+You will need Python 3.7 and access to a GPU to run the code. The required packages are listed in the `requirements.txt` file.
 
 
 ## How to Generate a Music Video
