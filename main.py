@@ -4,7 +4,6 @@ from stylegan       import g_synthesis
 from biggan         import BigGAN
 from tqdm           import tqdm
 
-import create_video
 import tempfile
 import argparse
 import torch
@@ -136,6 +135,8 @@ def sigmoid(x):
     return math.tanh(1.5*x/(math.sqrt(1.- math.pow(x, 2.)) + 1e-6)) / 2 + .5
 
 def interpolate(templist, descs, model, audiofile, savepath, unique_num):
+    if not os.path.isdir(savepath):
+        os.mkdir(savepath)
 
     video_temp_list = []
 
@@ -199,12 +200,6 @@ def interpolate(templist, descs, model, audiofile, savepath, unique_num):
                     image_temp = create_image(img, t, current_lyric, generator, savepath, unique_num)
                     unique_num += 1
             image_temp_list.append(image_temp)
-
-    # OLD CODE TO GENERATE VIDEO
-        # video_temp = create_video.createvid(f'{current_lyric}', image_temp_list, duration=ttime / N)
-        # video_temp_list.append(video_temp)
-    # Finally create the final output and save to output folder
-    # create_video.concatvids(descs, video_temp_list, audiofile, lyrics=lyrics)
 
 if __name__ == '__main__':
     templist, descs, model = main()

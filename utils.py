@@ -61,17 +61,10 @@ def create_image(img, i, text, gen, savepath, unique_num, pre_scaled=True):
         img = scale(img, 48*4, 32*4)
     img = np.array(img)
 
-    # NEW CODE
     img = (img + 1.0) / 2.0 * 255.0
     img = img.astype(np.uint8)
     img_pil = Image.fromarray(img)
-    img_pil.save(f"{savepath}/{unique_num}_{text}_{i}.png") # Specify save path
-
-    # OLD CODE TO SAVE IMAGE
-    # with tempfile.NamedTemporaryFile() as image_temp:
-    #     imageio.imwrite(image_temp.name+".png", img)
-    #     image_temp.seek(0)
-    #     return image_temp
+    img_pil.save(f"{savepath}/{unique_num}_{text}_{i}.png")
 
 nom = torchvision.transforms.Normalize((0.48145466, 0.4578275, 0.40821073), (0.26862954, 0.26130258, 0.27577711))
 
