@@ -12,3 +12,5 @@ You will need Python 3.7 and access to a GPU to run the code. The required packa
 
 
 ## How to Generate a Music Video
+
+To watch the music video, we recommend that you upload the video to Google Drive or YouTube. QuickTime Player does not work for playing the video.
