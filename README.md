@@ -23,7 +23,7 @@ To run the code locally, follow these instructions:
 In the notebook, we have provided an example using Levitating by Dua Lipa. If you wish to use a different song, you will need:
 - The song name (e.g. "Levitating")
 - The ID of a YouTube video for the song containing a transcript of the lyrics (e.g. "G2nJPEDc02k" for [this YouTube video](https://www.youtube.com/watch?v=G2nJPEDc02k) of Levitating)
-- The audio features containing the energy and valence of the song from Spotipy, a Python library for the Spotify Web API (e.g. refer to the [Spotipy API Reference](https://spotipy.readthedocs.io/en/2.19.0/#spotipy.client.Spotify.audio_features)
+- The audio features containing the energy and valence of the song from Spotipy, a Python library for the Spotify Web API (e.g. refer to the [Spotipy API Reference](https://spotipy.readthedocs.io/en/2.19.0/#spotipy.client.Spotify.audio_features))
 - The audio track of the song as a M4A file (e.g. `audio_files/Levitating.m4a`)
 - You can also modify the directory and file paths for the outputs of your song if needed
 
